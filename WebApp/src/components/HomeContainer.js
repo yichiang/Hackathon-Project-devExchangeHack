@@ -1,5 +1,7 @@
 import React, {Component } from 'react';
 import {Header, Button, Card, Icon, Image, Table  } from 'semantic-ui-react'
+import checkImg from '../checkout.png';
+
 const product = {
   "imageUrl":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5909/5909100_sd.jpg;maxHeight=640;maxWidth=550",
     "title":"harman/kardon - Invoke Smart Bluetooth Speaker with Cortana Voice Assistant - Graphite",
@@ -57,12 +59,14 @@ class HomeContainer extends Component {
   }
   render() {
         return (
-        <div className="home-container">
-          <div>
+        <div>
+          <div className="home-container">
+          <div style={{marginRight: '20px'}}>
           <Header as='h2'>
-    <Icon name='payment' />
+    {/* <Icon name='payment' /> */}
     <Header.Content>
-Check out
+{/* Check out */}
+<img src={checkImg} />
     </Header.Content>
   </Header>
                         <div>
@@ -86,22 +90,24 @@ Check out
 
     </Card.Content>
   </Card>
+</div>
+
             </div>
             <Table celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Name</Table.HeaderCell>
-                  <Table.HeaderCell>Status</Table.HeaderCell>
-                  <Table.HeaderCell>Notes</Table.HeaderCell>
+                  <Table.HeaderCell>Image</Table.HeaderCell>
+                  <Table.HeaderCell>Retailer</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
               <Table.Body>
-{this.state.retailer && this.state.retailer.map(x =>
+{this.state.retailers && this.state.retailers.map(x =>
   <Table.Row negative>
-          <Table.Cell>Jill</Table.Cell>
-          <Table.Cell>Unknown</Table.Cell>
-          <Table.Cell>None</Table.Cell>
+          <Table.Cell>
+            <img src={x.imageUrl} />
+          </Table.Cell>
+          <Table.Cell>{x.retailer}</Table.Cell>
         </Table.Row>
 )
 
