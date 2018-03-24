@@ -334,7 +334,7 @@ this.setState({currentBlanace: currentBlanace})
 
        openAuth(){
 console.log("open")
-         signinWin = window.open("https://api.dxhackathon.com/oauth2/authorize?redirect_uri=http://localhost:3000&scope=read_rewards_account_info&client_id=vgw3sf4f8nq3b98i1gdfr8wpx4gpty0ska52&response_type=code", "SignIn", "width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500+ ",top=" + 500);
+         signinWin = window.open("https://api.dxhackathon.com/oauth2/authorize?redirect_uri=http://localhost:3000&scope=read_rewards_account_info&client_id=vgw3sf4f8nq3b98i1gdfr8wpx4gpty0ska52&response_type=code", "SignIn", "width=780,height=800,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=" + 500+ ",top=" + 500);
          setTimeout(()=> idTimer = setInterval(()=>this.CheckLoginStatus(this), 500), 6000);
          // signinWin.focus();
 
