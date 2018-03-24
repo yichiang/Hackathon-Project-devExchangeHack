@@ -8,3 +8,14 @@ margin-top: 20px !important;
 #recharts_measurement_span{
   margin: 0 !important;
 }
+
+.centerCard {
+  margin: auto;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}

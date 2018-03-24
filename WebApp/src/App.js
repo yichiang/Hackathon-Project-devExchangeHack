@@ -55,6 +55,7 @@ class App extends Component {
 
     <Switch>
       <Route exact path={'/'} component={() =><PortalContainer token={this.state.token}/>} />
+      <Route exact path={'/checkout'} component={() =><HomeContainer token={this.state.token}/>} />
       <Route exact path={'/home'} component={() =><OfferContainer token={this.state.token}/>} />
       <Route  path={'/offer'} component={() => <OfferContainer token={this.state.token}/>} />
       <Route component={HomeContainer} />

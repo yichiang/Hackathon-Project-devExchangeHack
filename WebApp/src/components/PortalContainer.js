@@ -5,6 +5,7 @@ import moment from 'moment'
 import {LineChart,Line, PieChart, Pie, Legend, Tooltip, BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid} from 'recharts';
 import $ from 'jquery'
 // import LogoImg from '../img/recycle_bits_logo.png';
+import LogoImg from '../logo.png';
 
 const data = [
       {name: 'Page A', overtime: 4000, afterspend: 2400, amt: 2400},
@@ -439,7 +440,7 @@ console.log("data---", data)
         <div>
           <Menu pointing>
             <Menu.Item>
-         <img src='./..logo.png' />
+         <img src={LogoImg} style={{height: '50px', width: '100px'}}/>
        </Menu.Item>
                    <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
                    <Menu.Item name='Banking' active={activeItem === 'Banking'} onClick={this.handleItemClick} />
