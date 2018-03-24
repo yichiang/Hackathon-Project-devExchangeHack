@@ -5,6 +5,7 @@ import { BrowserRouter,
 
 import HomeContainer from './components/HomeContainer';
 import OfferContainer from './components/OfferContainer';
+import PortalContainer from './components/PortalContainer';
 import $ from 'jquery'
 import 'semantic-ui-css/semantic.min.css';
 
@@ -48,10 +49,10 @@ class App extends Component {
       render() {
           return (
 <div>
-  !!!
   {this.state.token && <BrowserRouter>
     <Switch>
-      <Route exact path={'/'} component={() =><OfferContainer token={this.state.token}/>} />
+      <Route exact path={'/'} component={() =><PortalContainer token={this.state.token}/>} />
+      <Route exact path={'/home'} component={() =><OfferContainer token={this.state.token}/>} />
       <Route  path={'/offer'} component={() => <OfferContainer token={this.state.token}/>} />
       <Route component={HomeContainer} />
     </Switch>
