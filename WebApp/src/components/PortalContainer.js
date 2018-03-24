@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import '../App.css';
-import {Input, Menu, Form, Modal,Header, Message, Table, List, Button, Grid ,Card, Icon, Image } from 'semantic-ui-react'
+import {Segment, Input, Menu, Form, Modal,Header, Message, Table, List, Button, Grid ,Card, Icon, Image } from 'semantic-ui-react'
 import moment from 'moment'
 import {LineChart,Line, PieChart, Pie, Legend, Tooltip, BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid} from 'recharts';
 import $ from 'jquery'
@@ -166,6 +166,7 @@ var idTimer;
 
 const productWishList = [
   {
+    "title":"Critter Piller Kid's Travel Buddy and Comfort Pillow, Grey Elephant, Hypoallergenic, Machine Washable, Recycled Filling ",
     "imageUrl":"https://static.wixstatic.com/media/e2c770_a380bf4a20774154b8ad666fc9c7a35f~mv2_d_5040_5040_s_4_2.jpg/v1/fill/w_498,h_498,al_c,q_90/file.jpg",
     "url":"https://www.amazon.com/gp/product/B0007VYGTS?th=1",
     "price":17.04,
@@ -535,117 +536,125 @@ console.log("data---", data)
   </button>
 </div>
 }
+
       <Grid>
-  <Grid.Column width={7}>
-    <Header as='h2'>
-    <Icon name='doctor' />
-    <Header.Content>
-      Balance ${this.state.currentBlanace}
-    </Header.Content>
-    </Header>
-
-    <LineChart width={500} height={200} data={this.state.accountBalanceEst}
-                margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-           <XAxis dataKey="name"/>
-           <YAxis/>
-           <CartesianGrid strokeDasharray="3 3"/>
-           <Tooltip/>
-           <Legend />
-           <Line type="monotone" dataKey="overtime" stroke="#8884d8" activeDot={{r: 8}}/>
-           <Line type="monotone" dataKey="overtimeInterest" stroke="#82ca9d" />
-           <Line type="monotone" dataKey="afterProductSpend" stroke="#8884d8" activeDot={{r: 8}}/>
-          </LineChart>
-          <div style={{marginTop:'20px'}}>
-            <Header as='h2'>
-            <Icon name='money' />
-            <Header.Content>
-              Schedule Transfer
-            </Header.Content>
+        {this.state.activeItem === 'Banking' &&
+        <Grid.Column >
+          <Header as='h2'>
+          <Icon name='doctor' />
+          <Header.Content>
+            Balance ${this.state.currentBlanace}
+          </Header.Content>
           </Header>
-          <List divided relaxed>
-            {this.state.scheduleTransfer && this.state.scheduleTransfer.map(x =>
-              <List.Item>
-                <List.Content>
-                  <List.Header>{x.title}</List.Header>
-                  <List.Description>
-                    ${x.amount} per month
 
-                  </List.Description>
-                </List.Content>
-              </List.Item>
+          <LineChart width={500} height={200} data={this.state.accountBalanceEst}
+                      margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                 <XAxis dataKey="name"/>
+                 <YAxis/>
+                 <CartesianGrid strokeDasharray="3 3"/>
+                 <Tooltip/>
+                 <Legend />
+                 <Line type="monotone" dataKey="overtime" stroke="#8884d8" activeDot={{r: 8}}/>
+                 <Line type="monotone" dataKey="overtimeInterest" stroke="#82ca9d" />
+                 <Line type="monotone" dataKey="afterProductSpend" stroke="#8884d8" activeDot={{r: 8}}/>
+                </LineChart>
+                <div style={{marginTop:'20px'}}>
+                  <Header as='h2'>
+                  <Icon name='money' />
+                  <Header.Content>
+                    Schedule Transfer
+                  </Header.Content>
+                </Header>
+                <List divided relaxed>
+                  {this.state.scheduleTransfer && this.state.scheduleTransfer.map(x =>
+                    <List.Item>
+                      <List.Content>
+                        <List.Header>{x.title}</List.Header>
+                        <List.Description>
+                          ${x.amount} per month
+
+                        </List.Description>
+                      </List.Content>
+                    </List.Item>
+                  )}
+
+        </List>
+        <div>
+          <Modal trigger={<Button>Make a Transfer Now</Button>} style={{margin: '0'}}>
+              <Modal.Header>We needs more information</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>Default Profile Image</Header>
+                  <Form>
+        <Form.Group widths='equal'>
+        <Form.Input fluid label='transferAmount' placeholder='transferAmount' />
+        <Form.Input fluid label='transfer Date(YYYY-MM-DD)' placeholder='transferDate'/>
+        <Form.Select fluid label='Transfer Type' options={transferTypeOptions} placeholder='Transfer' />
+        </Form.Group>
+
+        <Form.Button>Submit</Form.Button>
+        </Form>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
+        </div>
+                </div>
+
+        </Grid.Column>
+        }
+
+    {this.state.activeItem === 'home' &&
+    <Grid.Column>
+      <Header as='h2'>
+      <Icon name='money' />
+      <Header.Content>
+        Rewards
+      </Header.Content>
+    </Header>
+      <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Currency</Table.HeaderCell>
+              <Table.HeaderCell>Account Type</Table.HeaderCell>
+              <Table.HeaderCell>Credit Card Account</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {this.state.rewardsAccounts&& this.state.rewardsAccounts.map(a => (
+
+
+                    <Table.Row>
+                      <Table.Cell>{a.accountDisplayName}</Table.Cell>
+                      <Table.Cell>{a.rewardsCurrency}</Table.Cell>
+                      <Table.Cell>{a.productAccountType}</Table.Cell>
+                      {/* <Table.Cell>{a.creditCardAccount}</Table.Cell> */}
+                      <Table.Cell>
+                        {a.creditCardAccount&&
+                          <div>
+                         <div>{a.creditCardAccount.issuer}</div>
+                         <div>{a.creditCardAccount.product}</div>
+                         <div>{a.creditCardAccount.lastFour}</div>
+                         <div>{a.creditCardAccount.network}</div>
+                         <div>{a.creditCardAccount.isBusinessAccount}</div>
+                         </div>
+                        }
+
+                      </Table.Cell>
+
+                  </Table.Row>
+
+            )
             )}
+    </Table.Body>
 
-  </List>
-  <div>
-    <Modal trigger={<Button>Make a Transfer Now</Button>} style={{margin: '0'}}>
-        <Modal.Header>We needs more information</Modal.Header>
-        <Modal.Content>
-          <Modal.Description>
-            <Header>Default Profile Image</Header>
-            <Form>
-<Form.Group widths='equal'>
-<Form.Input fluid label='transferAmount' placeholder='transferAmount' />
-<Form.Input fluid label='transfer Date(YYYY-MM-DD)' placeholder='transferDate'/>
-<Form.Select fluid label='Transfer Type' options={transferTypeOptions} placeholder='Transfer' />
-</Form.Group>
+      </Table>
+    </Grid.Column>
+    }
 
-<Form.Button>Submit</Form.Button>
-</Form>
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
-  </div>
-          </div>
-
-  </Grid.Column>
-  <Grid.Column width={9}>
-    <Header as='h2'>
-    <Icon name='money' />
-    <Header.Content>
-      Rewards
-    </Header.Content>
-  </Header>
-    <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Currency</Table.HeaderCell>
-            <Table.HeaderCell>Account Type</Table.HeaderCell>
-            <Table.HeaderCell>Credit Card Account</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {this.state.rewardsAccounts&& this.state.rewardsAccounts.map(a => (
-
-
-                  <Table.Row>
-                    <Table.Cell>{a.accountDisplayName}</Table.Cell>
-                    <Table.Cell>{a.rewardsCurrency}</Table.Cell>
-                    <Table.Cell>{a.productAccountType}</Table.Cell>
-                    {/* <Table.Cell>{a.creditCardAccount}</Table.Cell> */}
-                    <Table.Cell>
-                      {a.creditCardAccount&&
-                        <div>
-                       <div>{a.creditCardAccount.issuer}</div>
-                       <div>{a.creditCardAccount.product}</div>
-                       <div>{a.creditCardAccount.lastFour}</div>
-                       <div>{a.creditCardAccount.network}</div>
-                       <div>{a.creditCardAccount.isBusinessAccount}</div>
-                       </div>
-                      }
-
-                    </Table.Cell>
-
-                </Table.Row>
-
-          )
-          )}
-  </Table.Body>
-
-    </Table>
-  </Grid.Column>
 </Grid>
-
+{this.state.activeItem === 'home' &&
+<Segment>
 <Header as='h2'>
 <Icon name='shop' />
 <Header.Content>
@@ -683,6 +692,11 @@ console.log("data---", data)
       </Card>
   )}
 </div>
+</Segment>
+
+}
+{this.state.activeItem === 'Banking' &&
+<Segment>
 
                 <Header as='h2'>
                 <Icon name='doctor' />
@@ -728,7 +742,10 @@ console.log("data---", data)
             </Table.Body>
 
                 </Table>
-
+              </Segment>
+}
+{this.state.activeItem === 'Recommendations' &&
+<Segment>
                 <Header as='h2'>
                 <Icon name='money' />
                 <Header.Content>
@@ -795,7 +812,10 @@ console.log("data---", data)
               </Grid.Row>
               </Grid>
               </div>
-        </div>
+        </Segment>
+      }
+      </div>
+
       )
   }
 }
