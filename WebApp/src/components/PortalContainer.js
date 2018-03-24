@@ -1,9 +1,11 @@
 import React, {Component } from 'react';
 import '../App.css';
-import {Form, Modal,Header, Message, Table, List, Button, Grid ,Card, Icon, Image } from 'semantic-ui-react'
+import {Input, Menu, Form, Modal,Header, Message, Table, List, Button, Grid ,Card, Icon, Image } from 'semantic-ui-react'
 import moment from 'moment'
 import {LineChart,Line, PieChart, Pie, Legend, Tooltip, BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid} from 'recharts';
 import $ from 'jquery'
+// import LogoImg from '../img/recycle_bits_logo.png';
+
 const data = [
       {name: 'Page A', overtime: 4000, afterspend: 2400, amt: 2400},
 ];
@@ -153,6 +155,7 @@ const accountsData = {
     state = {
       accounts:accountsData.accounts
       ,products:[]
+      , activeItem: "home"
       , rewardToken: ""
       , fRewordToken: ""
       , currentBlanace: 0
@@ -394,12 +397,27 @@ console.log("data---", data)
        //      error: function(error) {
        //      }
        //    });
+       handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     render() {
       // console.log(this.state.rewardsAccounts)
+      const {activeItem} = this.state;
         return (
 
         <div>
+          <Menu pointing>
+            <Menu.Item>
+         <img src='./..logo.png' />
+       </Menu.Item>
+                   <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+                   <Menu.Item name='Banking' active={activeItem === 'Banking'} onClick={this.handleItemClick} />
+                   <Menu.Item name='Recommendations' active={activeItem === 'Recommendations'} onClick={this.handleItemClick} />
+                   <Menu.Menu position='right'>
+                     <Menu.Item>
+                       <Input icon='search' placeholder='Search...' />
+                     </Menu.Item>
+                   </Menu.Menu>
+                 </Menu>
 
           <Message>
         <Message.Header>New Site Features</Message.Header>
