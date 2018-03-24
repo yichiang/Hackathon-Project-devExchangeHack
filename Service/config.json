@@ -1,0 +1,5 @@
+{
+  "baseUrl": "Capital One Sandbox URL",
+  "clientId": "Client Id of the registered app at developer.capitalone.com",
+  "clientSecret": "Client Secret of the registered app at developer.capitalone.com"
+}
