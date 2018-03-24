@@ -6,6 +6,7 @@ import { BrowserRouter,
 import HomeContainer from './components/HomeContainer';
 import OfferContainer from './components/OfferContainer';
 import $ from 'jquery'
+import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
   state = {token: ""}
