@@ -1,2 +1,6 @@
 .App {
 }
+.ui.modal.transition.visible.active{
+margin-top: 20px; 
+
+}

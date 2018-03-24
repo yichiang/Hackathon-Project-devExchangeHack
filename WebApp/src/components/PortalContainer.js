@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import '../App.css';
-import {Header, Message, Table, List, Button, Grid ,Card, Icon, Image } from 'semantic-ui-react'
+import {Form, Modal,Header, Message, Table, List, Button, Grid ,Card, Icon, Image } from 'semantic-ui-react'
 import moment from 'moment'
 import {LineChart,Line, PieChart, Pie, Legend, Tooltip, BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid} from 'recharts';
 import $ from 'jquery'
@@ -10,7 +10,10 @@ const data = [
 const userInfo = {
   "monthlyDeposit":100
 }
-
+const transferTypeOptions = [
+  { key: 'ACH', text: 'ACH', value: 'ACH' },
+  { key: 'Internal', text: 'Internal', value: 'Internal' },
+]
 const scheduleTransfer = [
   {"title":"tuition","amount": 200,"period": 1}
 ]
@@ -58,10 +61,10 @@ const rewardsAccounts =
 ]
 var signinWin;
 var idTimer;
+
 const productWishList = [
   {
-    "imageUrl":"data:image/webp;base64,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",
-    "title":"Critter Piller Kid's Travel Buddy and Comfort Pillow, Grey Elephant, Hypoallergenic, Machine Washable, Recycled Filling",
+    "imageUrl":"https://static.wixstatic.com/media/e2c770_a380bf4a20774154b8ad666fc9c7a35f~mv2_d_5040_5040_s_4_2.jpg/v1/fill/w_498,h_498,al_c,q_90/file.jpg",
     "url":"https://www.amazon.com/gp/product/B0007VYGTS?th=1",
     "price":17.04,
     "lowestPricePast30Day":17.04,
@@ -80,8 +83,45 @@ const productWishList = [
       "seller":"bestbuy",
       "accountName":5678
 
-    }
+    }, {
+    "imageUrl":"https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1DkM6?ver=d01b&q=90&m=6&h=423&w=752&b=%23FFFFFFFF&f=jpg&o=f&aim=true",
+      "title":"Lenovo Explorer Bundle, Wireless Headset and Motion Controllers for Windows Mixed Reality, Iron Grey, G0A20002WW",
+      "url":"https://smile.amazon.com/dp/B0764GKZ15/",
+      "price":275.00,
+      "lowestPricePast30Day":249.99,
+      "important": 1,
+      "preferBuyBy": "04-15-2018",
+      "seller":"amazon",
+      "accountName":5678
+
+}, {
+
+"imageUrl":"https://d2droglu4qf8st.cloudfront.net/2015/07/227866/Butter-Dispenser_ExtraLarge1000_ID-1084430.jpg?v=1084430",
+      "title":"Butter Dispenser - White - USA Designed - Copy of Original",
+      "url":"https://smile.amazon.com/dp/B00A1PO3XE/",
+      "price":14.99,
+      "lowestPricePast30Day":9.99,
+      "important": 1,
+      "preferBuyBy": "06-15-2018",
+      "seller":"amazon",
+      "accountName":5678
+
+}, {
+
+"imageUrl":"https://static.gigabyte.com/Product/3/6317/2017081010490727_big.png",
+      "title":"AORUS GeForce GTX 1070 Gaming Box eGPU, GV-N1070IXEB-8GD",
+      "url":"https://www.newegg.com/Product/Product.aspx?Item=N82E16814125990&cm_re=aorus-_-14-125-990-_-Product",
+      "price":599.99,
+      "lowestPricePast30Day":599.99,
+      "important": 1,
+      "preferBuyBy": "04-05-2018",
+      "seller":"newegg",
+      "accountName":5678
+
+}
 ]
+
+
 const accountsData = {
   "accounts": [
     {
@@ -112,6 +152,7 @@ const accountsData = {
   class PortalContainer extends Component {
     state = {
       accounts:accountsData.accounts
+      ,products:[]
       , rewardToken: ""
       , fRewordToken: ""
       , currentBlanace: 0
@@ -131,6 +172,7 @@ const accountsData = {
     componentDidMount() {
       console.log("componentDidMount")
       this.getResponse();
+      this.getProduct();
       var queryStr = this.getParameterByName("code", window.location.href)
       console.log("queryStr!!", queryStr);
       if(queryStr){
@@ -148,7 +190,50 @@ const accountsData = {
       });
 
     }
+    getProduct = () => {
+      if(!this.props.token){return;}
+      var self = this;
+      console.log("call offer")
+        $.ajax({
+         url: "https://api.dxhackathon.com/credit-offers/products?limit=50&offset=0",
+         contentType: "application/x-www-form-urlencoded",
+         headers: {
+           'Authorization': 'Bearer '+this.props.token
+         },
+         success: function(response) {
+           // console.log(response);
+           self.setState({products: response.products})
+           // self.getProductDetail(response.products[0])
+           for (var i = 0; i < response.products.length; i++) {
+              self.getProductDetail(response.products[i], i)
+            }
+         },
+         error: function(error) {
+         }
+       });
 
+       }
+
+       getProductDetail(product, index){
+         var self = this;
+         console.log("Get product",product)
+           $.ajax({
+            url: `https://api.dxhackathon.com/credit-offers/products/cards/${product.productType.toLowerCase().replace("card","")}/${product.productId}`,
+            contentType: "application/x-www-form-urlencoded",
+            headers: {
+              'Authorization': 'Bearer '+this.props.token
+            },
+            success: function(response) {
+              // console.log(response);
+              var productS = self.state.products;
+              productS[index].details=response;
+              self.setState({products: productS})
+            },
+            error: function(error) {
+            }
+          });
+
+       }
     getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -352,7 +437,7 @@ console.log("data---", data)
            <Line type="monotone" dataKey="overtimeInterest" stroke="#82ca9d" />
            <Line type="monotone" dataKey="afterProductSpend" stroke="#8884d8" activeDot={{r: 8}}/>
           </LineChart>
-          <div>
+          <div style={{marginTop:'20px'}}>
             <Header as='h2'>
             <Icon name='money' />
             <Header.Content>
@@ -366,16 +451,32 @@ console.log("data---", data)
                   <List.Header>{x.title}</List.Header>
                   <List.Description>
                     ${x.amount} per month
-                    <div>
-                      <button class="ui button">Transfer Money Now</button>
-                    </div>
+
                   </List.Description>
                 </List.Content>
               </List.Item>
             )}
 
   </List>
+  <div>
+    <Modal trigger={<Button>Make a Transfer Now</Button>} style={{margin: '0'}}>
+        <Modal.Header>We needs more information</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <Header>Default Profile Image</Header>
+            <Form>
+<Form.Group widths='equal'>
+<Form.Input fluid label='transferAmount' placeholder='transferAmount' />
+<Form.Input fluid label='transfer Date(YYYY-MM-DD)' placeholder='transferDate'/>
+<Form.Select fluid label='Transfer Type' options={transferTypeOptions} placeholder='Transfer' />
+</Form.Group>
 
+<Form.Button>Submit</Form.Button>
+</Form>
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
+  </div>
           </div>
 
   </Grid.Column>
@@ -452,12 +553,14 @@ console.log("data---", data)
           </Card.Meta>
           <Card.Description>
             Preferred Buy {moment(x.preferBuyBy).format('L')}
+            <a href={x.url} target="_blank" style={{margin: '20px'}}>View Product</a>
+
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a href={x.url} target="_blank">View Product</a>
-            {/* <Icon name='user' /> */}
-            {/* 22 Friends */}
+          <div className='ui two buttons'>
+                   <Button basic color='green'>Use my reward now</Button>
+                 </div>
         </Card.Content>
       </Card>
   )}
@@ -507,6 +610,73 @@ console.log("data---", data)
             </Table.Body>
 
                 </Table>
+
+                <Header as='h2'>
+                <Icon name='money' />
+                <Header.Content>
+                    Credit Card Recommendations
+                </Header.Content>
+              </Header>
+              <div>
+                <Grid columns={3}>
+                <Grid.Row>
+                    {this.state.products&&  this.state.products.map((p) => {
+                    return (
+                      <Grid.Column key={p.productId}>
+
+                      <Card style={{Height:'500px', margin: '10px'}}>
+                        {p.details&&p.details.images&& p.details.images.map(pImg => (
+                          <Image src={pImg.url}  height={200}/>
+
+                        ))}
+
+                          <Card.Content>
+                            <Card.Header>
+                              <a href={p.applyNowLink}>{p.productDisplayName}</a>
+                            </Card.Header>
+                            <Card.Meta>
+                              <span className='date'>
+                                {p.productType}
+                              </span>
+                            </Card.Meta>
+
+                          </Card.Content>
+                          <Card.Content extra>
+
+                            <a>
+                              <Icon name='calendar outline' />
+                              {moment(p.activeFrom).format('L')}
+                            </a>
+                          </Card.Content>
+                          <Card.Description style={{maxHeight:'300px', 'overflowY':'scroll'}}>
+                            <List style={{padding:'0 10px'}}>
+
+                            {p.details&&p.details.additionalMarketingCopy&& p.details.additionalMarketingCopy.map(d => (
+
+                             <List.Item style={{color:"black"}}>
+                               <Icon name='right triangle' />
+                              {d}
+                             </List.Item>
+
+                            ))}
+                          </List>
+
+                            </Card.Description>
+                          <Card.Content extra>
+                           <div className='ui two buttons'>
+                             <Button basic color='green'><a href={p.applyNowLink}>Apply Now</a></Button>
+                             <Button basic color='blue'>Read More</Button>
+                           </div>
+                         </Card.Content>
+                        </Card>
+                      </Grid.Column>
+
+                    )
+                  })
+                }
+              </Grid.Row>
+              </Grid>
+              </div>
         </div>
       )
   }
