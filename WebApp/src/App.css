@@ -1,6 +1,10 @@
 .App {
 }
 .ui.modal.transition.visible.active{
-margin-top: 20px; 
+margin-top: 20px !important;
 
+}
+
+#recharts_measurement_span{
+  margin: 0 !important;
 }

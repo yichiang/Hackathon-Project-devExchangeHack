@@ -19,7 +19,7 @@ const transferTypeOptions = [
 const scheduleTransfer = [
   {"title":"tuition","amount": 200,"period": 1}
 ]
-const retailers = 
+const retailers =
 [ { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/subway-gc2017.gif",
     "retailer": "Subway" },
   { "imageUrl":"https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/starbucks2012.gif",
@@ -446,7 +446,7 @@ console.log("data---", data)
                    <Menu.Item name='Recommendations' active={activeItem === 'Recommendations'} onClick={this.handleItemClick} />
                    <Menu.Menu position='right'>
                      <Menu.Item>
-                       <Input icon='search' placeholder='Search...' />
+                       {/* <Input icon='search' placeholder='Search...' /> */}
                      </Menu.Item>
                    </Menu.Menu>
                  </Menu>
@@ -611,7 +611,11 @@ console.log("data---", data)
           </Card.Meta>
           <Card.Description>
             Preferred Buy {moment(x.preferBuyBy).format('L')}
-            <a href={x.url} target="_blank" style={{margin: '20px'}}>View Product</a>
+            <div>
+            <a href={x.url} target="_blank" style={{margin: '20px'}}>
+              View Product
+            </a>
+          </div>
 
           </Card.Description>
         </Card.Content>
