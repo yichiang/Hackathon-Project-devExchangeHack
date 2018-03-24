@@ -39,6 +39,8 @@ class App extends Component {
        });
 
          }
+
+
          // renderWells() => (<BrowserRouter>
          //   <Switch>
          //     <Route exact path={'/'} component={() =><OfferContainer token={this.state.access_token}/>} />
@@ -50,6 +52,7 @@ class App extends Component {
           return (
 <div>
   {this.state.token && <BrowserRouter>
+
     <Switch>
       <Route exact path={'/'} component={() =><PortalContainer token={this.state.token}/>} />
       <Route exact path={'/home'} component={() =><OfferContainer token={this.state.token}/>} />

@@ -29,7 +29,7 @@ import $ from 'jquery'
            'Authorization': 'Bearer '+this.props.token
          },
          success: function(response) {
-           console.log(response);
+           // console.log(response);
            self.setState({products: response.products})
            // self.getProductDetail(response.products[0])
            for (var i = 0; i < response.products.length; i++) {
@@ -52,7 +52,7 @@ import $ from 'jquery'
               'Authorization': 'Bearer '+this.props.token
             },
             success: function(response) {
-              console.log(response);
+              // console.log(response);
               var productS = self.state.products;
               productS[index].details=response;
               self.setState({products: productS})
