@@ -10,6 +10,10 @@ const data = [
 const userInfo = {
   "monthlyDeposit":100
 }
+
+const scheduleTransfer = [
+  {"title":"tuition","amount": 200,"period": 1}
+]
 const rewardsAccounts =
 [
   {
@@ -106,12 +110,15 @@ const accountsData = {
 }
 
   class PortalContainer extends Component {
-    state = {accounts:accountsData.accounts
+    state = {
+      accounts:accountsData.accounts
       , rewardToken: ""
       , fRewordToken: ""
+      , currentBlanace: 0
       , rewardsAccounts: []
       , accountBalanceEst:[]
       , userInfo: userInfo
+      , scheduleTransfer: scheduleTransfer
       , productWishList:productWishList}
     constructor(props) {
       super(props);
@@ -157,6 +164,7 @@ const accountsData = {
     }
     updateBalance(){
       var currentBlanace = this.state.accounts.filter(x=>x.availableBalance).map(x=>x.availableBalance).reduce((a, b) => a + b, 0);
+this.setState({currentBlanace: currentBlanace})
       var estB = [];
       var currentM = moment().month;
       for (var i = 0; i < 5; i++) {
@@ -325,8 +333,15 @@ console.log("data---", data)
 </div>
 }
       <Grid>
-  <Grid.Column width={10}>
-    <LineChart width={600} height={300} data={this.state.accountBalanceEst}
+  <Grid.Column width={7}>
+    <Header as='h2'>
+    <Icon name='doctor' />
+    <Header.Content>
+      Balance ${this.state.currentBlanace}
+    </Header.Content>
+    </Header>
+
+    <LineChart width={500} height={200} data={this.state.accountBalanceEst}
                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
            <XAxis dataKey="name"/>
            <YAxis/>
@@ -337,8 +352,40 @@ console.log("data---", data)
            <Line type="monotone" dataKey="overtimeInterest" stroke="#82ca9d" />
            <Line type="monotone" dataKey="afterProductSpend" stroke="#8884d8" activeDot={{r: 8}}/>
           </LineChart>
+          <div>
+            <Header as='h2'>
+            <Icon name='money' />
+            <Header.Content>
+              Schedule Transfer
+            </Header.Content>
+          </Header>
+          <List divided relaxed>
+            {this.state.scheduleTransfer && this.state.scheduleTransfer.map(x =>
+              <List.Item>
+                <List.Content>
+                  <List.Header>{x.title}</List.Header>
+                  <List.Description>
+                    ${x.amount} per month
+                    <div>
+                      <button class="ui button">Transfer Money Now</button>
+                    </div>
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+            )}
+
+  </List>
+
+          </div>
+
   </Grid.Column>
-  <Grid.Column width={6}>
+  <Grid.Column width={9}>
+    <Header as='h2'>
+    <Icon name='money' />
+    <Header.Content>
+      Rewards
+    </Header.Content>
+  </Header>
     <Table celled>
         <Table.Header>
           <Table.Row>
@@ -358,7 +405,7 @@ console.log("data---", data)
                     <Table.Cell>{a.productAccountType}</Table.Cell>
                     {/* <Table.Cell>{a.creditCardAccount}</Table.Cell> */}
                     <Table.Cell>
-                      {/* {a.creditCardAccount&&
+                      {a.creditCardAccount&&
                         <div>
                        <div>{a.creditCardAccount.issuer}</div>
                        <div>{a.creditCardAccount.product}</div>
@@ -366,7 +413,7 @@ console.log("data---", data)
                        <div>{a.creditCardAccount.network}</div>
                        <div>{a.creditCardAccount.isBusinessAccount}</div>
                        </div>
-                      } */}
+                      }
 
                     </Table.Cell>
 
@@ -380,7 +427,15 @@ console.log("data---", data)
   </Grid.Column>
 </Grid>
 
+<Header as='h2'>
+<Icon name='shop' />
+<Header.Content>
+{this.state.productWishList.length}  Wish List Items
+</Header.Content>
+</Header>
+
 <div style={{display:'flex'}}>
+
   {this.state.productWishList && this.state.productWishList.map(x =>
     <Card style={{width: '400px', margin: '10px'}}>
         <div style={{margin: 'auto'}}>
@@ -400,17 +455,16 @@ console.log("data---", data)
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a>
+          <a href={x.url} target="_blank">View Product</a>
             {/* <Icon name='user' /> */}
             {/* 22 Friends */}
-          </a>
         </Card.Content>
       </Card>
   )}
 </div>
 
                 <Header as='h2'>
-                <Icon name='money' />
+                <Icon name='doctor' />
                 <Header.Content>
                   Accounts
                 </Header.Content>
