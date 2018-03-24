@@ -603,7 +603,7 @@ console.log("data---", data)
         </div>
         <Card.Content>
           <Card.Header>
-            {x.title} {x.price}
+            {x.title} ${x.price}
           </Card.Header>
           <Card.Meta>
             <span className='date'>
