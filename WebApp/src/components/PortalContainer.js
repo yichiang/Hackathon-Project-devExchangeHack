@@ -19,6 +19,37 @@ const transferTypeOptions = [
 const scheduleTransfer = [
   {"title":"tuition","amount": 200,"period": 1}
 ]
+const retailers = 
+[ { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/subway-gc2017.gif",
+    "retailer": "Subway" },
+  { "imageUrl":"https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/starbucks2012.gif",
+    "retailer": "Starbucks" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/shellgc2014.jpg",
+    "retailer": "Shell" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/Applebee2015a.jpg",
+    "retailer": "Applebee's" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/bpgc2014.jpg",
+    "retailer": "BP" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/bpgc2014.jpg",
+    "retailer": "Dunkin Donuts" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/Exxon2016.jpg",
+    "retailer": "ExxonMobile" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/oldnavy2012.jpg",
+    "retailer": "Old Navy" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/lowesgc2014.jpg",
+    "retailer": "Lowe's" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/Darden2017.jpg",
+    "retailer": "Olive Garden" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/Walmart2017.jpg",
+    "retailer": "Walmart" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/1800Flower2017.jpg",
+    "retailer": "1-800-Flowers.com" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/AMC2017.jpg",
+    "retailer": "AMC" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/amazon2012gc.gif",
+    "retailer": "Amazon" },
+  { "imageUrl": "https://www.loyaltygateway.com/rewards/ImageDisplayServlet?file=/apps_01/webapps/MRS/mcrewards_content/Catalog/en_US/items/iTunes2018.jpg",
+    "retailer": "Apple App Store" }];
 const rewardsAccounts =
 [
   {
